@@ -1,0 +1,5 @@
+Requirement already satisfied: elasticsearch-dsl in c:\users\asus\onedrive\bureau\projet bd nosql\elasticproject\elastic\lib\site-packages (6.4.0)
+Requirement already satisfied: six in c:\users\asus\onedrive\bureau\projet bd nosql\elasticproject\elastic\lib\site-packages (from elasticsearch-dsl) (1.14.0)
+Requirement already satisfied: elasticsearch<7.0.0,>=6.0.0 in c:\users\asus\onedrive\bureau\projet bd nosql\elasticproject\elastic\lib\site-packages (from elasticsearch-dsl) (6.4.0)
+Requirement already satisfied: python-dateutil in c:\users\asus\onedrive\bureau\projet bd nosql\elasticproject\elastic\lib\site-packages (from elasticsearch-dsl) (2.8.1)
+Requirement already satisfied: urllib3>=1.21.1 in c:\users\asus\onedrive\bureau\projet bd nosql\elasticproject\elastic\lib\site-packages (from elasticsearch<7.0.0,>=6.0.0->elasticsearch-dsl) (1.25.8)
