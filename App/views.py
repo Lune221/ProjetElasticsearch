@@ -20,7 +20,8 @@ def filmSearch(request):
     else:
         movies = ""
 
-    return render(request, "App/resultm.html", {"movies" : movies})
+    return render(request, "App/resultf.html", {"movies" : movies})
+
 
 def publisSearch(request):
     q = request.GET.get('q')
@@ -29,15 +30,18 @@ def publisSearch(request):
     print("Trying to connect ...#########")
     if q:
         t0 = time()
-        publis = Publication.objects.filter(title__icontains=q)
-        
-        #publis = PublicationDocument.search().query("match", title=q)
+        #print("Using MySQL and DJango for the search...###")
+        #publis = Publication.objects.filter(title__icontains=q)
+
+        print("Using ES and DJango for the search...###")
+        publis = PublicationDocument.search().query("match", title=q)
         nb = publis.count()
         t = time() - t0
     else:
         publis = ""
+        q = ""
     print("We are OK ...#########")
-    return render(request, "App/resultp.html", {"publis" : publis, "nombre" : nb, "time" : t})
+    return render(request, "App/resultp.html", {"publis" : publis, "nombre" : nb, "time" : t, "q" : q})
 
 
 def queryPublisFomJson(request):

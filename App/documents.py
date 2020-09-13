@@ -10,7 +10,7 @@ from .models import (
 )
 ##Movie
 
-films = Index('films')
+films = Index('movies')
 
 @films.doc_type
 class FilmDocument(DocType):
