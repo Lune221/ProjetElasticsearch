@@ -27,5 +27,7 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include(router.urls)),
 
-    path('research/', search, name="research"),
+    path('research/film', filmSearch, name="filmresearch"),
+    path('research/publis', publisSearch, name="publissearch"),
+    path("queryPublisFomJson", queryPublisFomJson),
 ]# + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

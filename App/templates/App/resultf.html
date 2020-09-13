@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Results</title>
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+        <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+        <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+
+    </head>
+
+    <body>
+        <div class="container">
+            <h3 style="margin-top: 20px;">
+                Faites votre recherche avec ElasticSearch!
+            </h3>
+            <div class="container-fluid" style="margin: 50px;">
+
+                <form action="" method="GET">
+                    <div class="form-group">
+                        <input type="text" name="q" placeholder="Faites votre recherche" class="form-control">
+                    </div>
+                    <div class="form-group" style="float: right;">
+                        <input type="submit" class="btn btn-success" name="" id="" value="Rechercher">
+                    </div>
+                </form>
+
+            </div>
+
+            <div class="row">
+
+                {% for movie in movies %}
+                <div class="col-sm-4">
+                    <div class="card card text-white bg-success">
+                        <div class="card-body">
+                            <h5 class="card-title"><strong><u>Titre</u></strong>: {{ movie.title }}</h5>
+                            <p class="card-text"><strong><u>Description</u></strong>: {{ movie.plot }}</p>
+                            <footer>
+                                <cite>
+                                    <strong><u>Année</u></strong> : <i>{{ movie.year }}</i>
+                                </cite>
+                            </footer>
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
+
+            </div>
+        </div>
+    </body>
+</html>
