@@ -38,10 +38,11 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
 
-    'rest_framework',
-    'App',
+    'rest_framework',#Django REST FRAMEWORK
+    'App',#Our Django App 
     'django_elasticsearch_dsl',
-    'django_elasticsearch_dsl_drf'
+    'django_elasticsearch_dsl_drf',# For the linkage on ES with the app above
+    'channels',#Django channels
 ]
 
 ELASTICSEARCH_DSL = {
@@ -139,3 +140,5 @@ STATICFILES_DIRS = [
     "static",
     '/var/www/static/',
 ]
+# Channels
+ASGI_APPLICATION = 'ElasticProject.routing.application'
