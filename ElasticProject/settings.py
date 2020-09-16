@@ -43,6 +43,7 @@ INSTALLED_APPS = [
     'django_elasticsearch_dsl',
     'django_elasticsearch_dsl_drf',# For the linkage on ES with the app above
     'channels',#Django channels
+    'chat' #For the chat example app
 ]
 
 ELASTICSEARCH_DSL = {
@@ -142,3 +143,13 @@ STATICFILES_DIRS = [
 ]
 # Channels
 ASGI_APPLICATION = 'ElasticProject.routing.application'
+'''
+CHANNEL_LAYERS = {
+    'default': {
+        'BACKEND': 'channels_redis.core.RedisChannelLayer',
+        'CONFIG': {
+            "hosts": [('127.0.0.1', 6379)],
+        },
+    },
+}
+'''

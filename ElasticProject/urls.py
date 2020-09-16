@@ -25,7 +25,8 @@ router.register('films', FilmView)
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', include(router.urls)),
+    path('', include(router.urls)),#For django REST
+    path('chat/', include('chat.urls')),
     path('research/film', filmSearch, name="filmresearch"),
     path('research/publis', publisSearch, name="publissearch"),
     path("queryPublisFomJson", queryPublisFomJson),

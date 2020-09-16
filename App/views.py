@@ -7,9 +7,12 @@ import json
 from time import time
 # Create your views here.
 
+#For REST FRAMEWORK
 class FilmView(viewsets.ModelViewSet):
     queryset = Film.objects.all()
     serializer_class = FilmSerializer
+
+#For web SOckets
 
 
 def filmSearch(request):
@@ -42,6 +45,21 @@ def publisSearch(request):
         q = ""
     print("We are OK ...#########")
     return render(request, "App/resultp.html", {"publis" : publis, "nombre" : nb, "time" : t, "q" : q})
+
+def publisAutcompletion(value):#To make autocompletion while rechearching publications
+    tab_pub = []
+    if value:
+        publis = PublicationDocument.search().query("match", title=value)
+        nb = publis.count() #The number of  found publications
+        #response = publis.execute()
+        i = 0
+        for pub in  publis:
+            tab_pub.append(pub.title)
+            i+=1
+            if i == 3:
+                break
+    print(tab_pub)
+    return tab_pub
 
 
 def queryPublisFomJson(request):
