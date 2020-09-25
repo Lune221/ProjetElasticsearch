@@ -1,9 +1,15 @@
-from django.shortcuts import render, HttpResponse
+#####################################
+#           IMPORTTANT!!!           #
+#   RUN WITH elasticsearch-5.6.9    #
+#                                   #
+#####################################
+from django.shortcuts import render, HttpResponse, redirect
 from .models import Film, Publication
 from rest_framework import viewsets
 from .serializers import FilmSerializer
 from .documents import FilmDocument, PublicationDocument
 import json
+from .image_scrapping import fetch_image_urls
 from time import time
 # Create your views here.
 
@@ -11,9 +17,6 @@ from time import time
 class FilmView(viewsets.ModelViewSet):
     queryset = Film.objects.all()
     serializer_class = FilmSerializer
-
-#For web SOckets
-
 
 def filmSearch(request):
     q = request.GET.get('q')
@@ -27,6 +30,7 @@ def filmSearch(request):
 
 
 def publisSearch(request):
+    
     q = request.GET.get('q')
     nb = 0
     t = 0
@@ -46,11 +50,12 @@ def publisSearch(request):
     print("We are OK ...#########")
     return render(request, "App/resultp.html", {"publis" : publis, "nombre" : nb, "time" : t, "q" : q})
 
+#For web SOckets
 def publisAutcompletion(value):#To make autocompletion while rechearching publications
     tab_pub = []
     if value:
         publis = PublicationDocument.search().query("match", title=value)
-        nb = publis.count() #The number of  found publications
+        #nb = publis.count() #The number of  found publications
         #response = publis.execute()
         i = 0
         for pub in  publis:
@@ -61,7 +66,30 @@ def publisAutcompletion(value):#To make autocompletion while rechearching public
     print(tab_pub)
     return tab_pub
 
+def result(request, identifier):
+    myurl = identifier #+ serie + typ + idx #We concatenate the full url of the Publication
+    try:
+        publi = {}
+        publis = PublicationDocument.search().query("match", url=myurl)#Querying the specific publication 
+        for pub in publis:#Take the first pub in the result
+            publi = pub.to_dict()
+            break
+        print(publi)
+        image_urls = fetch_image_urls(query=publi["title"], max_links_to_fetch=1, sleep_between_interactions=3) #We get the images for the book title
+        image_url = ""
+        for url in image_urls: #We take the first Image in the set
+            image_url = url
+            break
+        return render(request, "App/detail.html", context={ "publi" : publi, "url" : image_url })
+    except:
+        raise
+        return redirect(publisSearch)
+    finally:
+        pass    
+    
 
+
+#Function for putting a JSON file in the ElasticSearch DataBase
 def queryPublisFomJson(request):
 
     with open("C:/Users/ASUS/OneDrive/Bureau/Projet BD NoSQL/ElasticProject/ElasticProject/App/dblp.json", encoding='utf-8') as data_file:

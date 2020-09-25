@@ -11,34 +11,37 @@
     </head>
 
     <body>
-    
+        <header style="background-color: #bd5d38; height: 130px;">
+            <div><h3 class="card-title" style="padding: 10px; color: white;"><strong>xool.sn</strong></h3></div>
+            <div class="card-title"><center style="font-family:cursive; font-size: larger; color: whitesmoke;">Xool, Votre Moteur de recherche sur plus de 14000 publications!</center></div>
+        </header>
+        
         <div class="container">
-            <h3 style="margin-top: 20px;">
-                Faites votre recherche avec ElasticSearch!
-            </h3>
             <div class="container-fluid" style="margin: 50px;">
-                <!--
-                    
-                -->
-                <form action="" method="GET" autocomplete="off">
-                    <div class="form-group autocomplete" style="width: 700px;">
+                
+                <form action="" method="GET" autocomplete="off"">
+                    <div class="form-group autocomplete" style="width: 900px;">
                         <input id="myInput" type="text" name="q" placeholder="Faites votre recherche" class="form-control">
+                        
+                        <small id="" class="text-muted">
+                            Faites votre recherche avec ElasticSearch!
+                        </small>
+                         
                     </div>
                     
                     <div class="form-group" style="float: right;">
                         <input type="submit" class="btn btn-success" name="" id="" value="Rechercher">
                     </div>
-                </form>
+                </form>    
             </div>
-            <h5>Le nombre de resultat : {{ nombre }}</h5>
-            <h5>Le temps de recherche : {{ time }}</h5>
-            <div class="row">
+            <h6>Le temps de recherche : {{ time }}</h6>
+            <div class="">
 
                 {% for publi in publis %}
-                <div class="col-sm-4" style="margin: 20px;">
-                    <div class="card card text-white bg-success">
+                <div class="" style="margin: 20px;padding: 10px 50px;">
+                    <div class="card card text-white" style="background-color: #656A8C ;">
                         <div class="card-body">
-                            <h5 class="card-title"><strong><u>Titre</u></strong>: <span class="titre">{{ publi.title }}</span></h5>
+                            <h5 class="card-title" style="color: white; background-color: coral; border-radius: 4px;"><a href="{% url 'detail' identifier=publi.url %}" style="text-decoration: none;"><span class="titre" style="color: white;">{{ publi.title }}</span></a></h5>
                             <p class="card-text"><strong><u>BookTitle</u></strong>: {{ publi.booktitle }}</p>
                             <footer>
                                 <cite>
@@ -51,7 +54,13 @@
                 {% endfor %}
             </div>
         </div>
-        <script src="{% static 'autocompletion.js' %}"></script>
+        <footer style="bottom: 0px;position: fixed ;background-color: #bd5d38; width: 100%; height: 30px;">
+            <center style="font-family:cursive; font-size: 15px; color: whitesmoke;">
+                    Made by Hearth with ElasticSearch!
+            </center>
+        </footer>
+        <script src="{% static 'autocompletion.js' %}">
+        </script>
         <script>
             autocomplete(document.getElementById("myInput"));
         </script>
