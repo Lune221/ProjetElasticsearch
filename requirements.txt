@@ -46,7 +46,7 @@ service-identity==18.1.0
 six==1.14.0
 sphinx-me==0.3
 sqlparse==0.3.1
-Twisted==20.3.0
+Twisted==22.4.0
 txaio==20.4.1
 urllib3==1.25.8
 zope.event==4.4
